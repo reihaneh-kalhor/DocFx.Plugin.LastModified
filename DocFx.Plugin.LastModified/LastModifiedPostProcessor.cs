@@ -20,7 +20,7 @@ namespace DocFx.Plugin.LastModified
     public class LastModifiedPostProcessor : IPostProcessor
     {
         private int _addedFiles;
-        private Repository _repo = new Repository("https://bitbucket.org/stylelabsdev/stylelabs.m.docs/src/master/");
+        private Repository _repo = new Repository("https://Rei_Kalhor@bitbucket.org/stylelabsdev/stylelabs.m.docs.git");
 
         public ImmutableDictionary<string, object> PrepareMetadata(ImmutableDictionary<string, object> metadata)
             => metadata;
