@@ -59,9 +59,9 @@ namespace DocFx.Plugin.LastModified
                         
                         var commitHeader = commitHeaderBuilder.ToString();
                         // truncate to 200 in case of huge commit body
-                        var commitBody = commitInfo.Message.Truncate(300);
+                        //var commitBody = commitInfo.Message.Truncate(300);
                         Logger.LogVerbose($"Writing {lastModified} with reason for {outputPath}...");
-                        WriteModifiedDate(outputPath, lastModified, commitHeader, commitBody);
+                        WriteModifiedDate(outputPath, lastModified, commitHeader/*, commitBody*/);
                         continue;
                     }
                 }
@@ -78,8 +78,8 @@ namespace DocFx.Plugin.LastModified
             return manifest;
         }
 
-        private void WriteModifiedDate(string outputPath, DateTimeOffset modifiedDate, string commitHeader = null,
-            string commitBody = null)
+        private void WriteModifiedDate(string outputPath, DateTimeOffset modifiedDate, string commitHeader = null/*,
+            string commitBody = null*/)
         {
             if (outputPath == null) throw new ArgumentNullException(nameof(outputPath));
 
@@ -122,12 +122,12 @@ namespace DocFx.Plugin.LastModified
                 reasonContainerNode.AppendChild(preCodeBlockNode);
                 
                 // inject body
-                preCodeBlockNode = htmlDoc.CreateElement("pre");
-                codeBlockNode = htmlDoc.CreateElement("code");
-                codeBlockNode.SetAttributeValue("class", "xml");
-                codeBlockNode.InnerHtml = commitBody;
-                preCodeBlockNode.AppendChild(codeBlockNode);
-                reasonContainerNode.AppendChild(preCodeBlockNode);
+                //preCodeBlockNode = htmlDoc.CreateElement("pre");
+                //codeBlockNode = htmlDoc.CreateElement("code");
+                //codeBlockNode.SetAttributeValue("class", "xml");
+                //codeBlockNode.InnerHtml = commitBody;
+                //preCodeBlockNode.AppendChild(codeBlockNode);
+                //reasonContainerNode.AppendChild(preCodeBlockNode);
 
                 // inject the entire block
                 collapsibleNode.AppendChild(reasonHeaderNode);
