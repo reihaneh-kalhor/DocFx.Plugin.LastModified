@@ -20,7 +20,7 @@ namespace DocFx.Plugin.LastModified
     public class LastModifiedPostProcessor : IPostProcessor
     {
         private int _addedFiles;
-        private Repository _repo = new Repository("https://github.com/discord-net/Discord.Net.git");
+        private Repository _repo = new Repository(@"C:\Reyhan\Work\SiteCore\My-Projects\Discord.Net-dev");
 
         public ImmutableDictionary<string, object> PrepareMetadata(ImmutableDictionary<string, object> metadata)
             => metadata;
