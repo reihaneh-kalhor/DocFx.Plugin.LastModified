@@ -96,7 +96,7 @@ namespace DocFx.Plugin.LastModified
             }
 
             var paragraphNode = htmlDoc.CreateElement("p");
-            paragraphNode.InnerHtml = $"This page was last modified at {modifiedDate} (UTC).";
+            paragraphNode.InnerHtml = $"This page was modified at {modifiedDate} Coordinated Universal Time (UTC).";
             var separatorNode = htmlDoc.CreateElement("hr");
             articleNode.AppendChild(separatorNode);
             articleNode.AppendChild(paragraphNode);
