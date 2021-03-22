@@ -83,6 +83,8 @@ namespace DocFx.Plugin.LastModified
         {
             if (outputPath == null) throw new ArgumentNullException(nameof(outputPath));
 
+            if (outputPath == "index.html") return;
+
             // load the document
             var htmlDoc = new HtmlDocument();
             htmlDoc.Load(outputPath);
