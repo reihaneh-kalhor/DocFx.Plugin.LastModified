@@ -96,7 +96,7 @@ namespace DocFx.Plugin.LastModified
             }
 
             var paragraphNode = htmlDoc.CreateElement("p");
-            paragraphNode.InnerHtml = $"This page was modified at {modifiedDate} (UTC).";
+            paragraphNode.InnerHtml = $"Last updated {modifiedDate} (UTC).";
             var separatorNode = htmlDoc.CreateElement("hr");
             articleNode.AppendChild(separatorNode);
             articleNode.AppendChild(paragraphNode);
@@ -110,8 +110,8 @@ namespace DocFx.Plugin.LastModified
                 var collapsibleNode = htmlDoc.CreateElement("div");
                 collapsibleNode.SetAttributeValue("class", "collapse-container last-modified");
                 collapsibleNode.SetAttributeValue("id", "accordion");
-                var reasonHeaderNode = htmlDoc.CreateElement("span");
-                reasonHeaderNode.InnerHtml = "<span class=\"arrow-r\"></span>Commit Message";
+                //var reasonHeaderNode = htmlDoc.CreateElement("span");
+                //reasonHeaderNode.InnerHtml = "<span class=\"arrow-r\"></span>Commit Message";
                 var reasonContainerNode = htmlDoc.CreateElement("div");
 
                 // inject header
@@ -130,7 +130,7 @@ namespace DocFx.Plugin.LastModified
                 //reasonContainerNode.AppendChild(preCodeBlockNode);
 
                 // inject the entire block
-                collapsibleNode.AppendChild(reasonHeaderNode);
+                //collapsibleNode.AppendChild(reasonHeaderNode);
                 collapsibleNode.AppendChild(reasonContainerNode);
                 articleNode.AppendChild(collapsibleNode);
             }
