@@ -49,7 +49,7 @@ namespace DocFx.Plugin.LastModified
                     if (commitInfo != null)
                     {
                         Logger.LogVerbose("Assigning commit date...");
-                        var lastModified = commitInfo.Author.When;
+                        DateTime lastModified = commitInfo.Author.When.UtcDateTime;
 
                         var commitHeaderBuilder = new StringBuilder();
                         Logger.LogVerbose("Appending commit author and email...");
@@ -78,7 +78,7 @@ namespace DocFx.Plugin.LastModified
             return manifest;
         }
 
-        private void WriteModifiedDate(string outputPath, DateTimeOffset modifiedDate, string commitHeader = null/*,
+        private void WriteModifiedDate(string outputPath, DateTime modifiedDate, string commitHeader = null/*,
             string commitBody = null*/)
         {
             if (outputPath == null) throw new ArgumentNullException(nameof(outputPath));
