@@ -27,6 +27,7 @@ namespace DocFx.Plugin.LastModified
 
         public Manifest Process(Manifest manifest, string outputFolder)
         {
+
             var versionInfo = Assembly.GetExecutingAssembly()
                                   .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
                                   ?.InformationalVersion ??
@@ -38,7 +39,7 @@ namespace DocFx.Plugin.LastModified
             var gitDirectory = Repository.Discover(manifest.SourceBasePath);
             if (gitDirectory != null) _repo = new Repository(gitDirectory);
 
-            foreach (var manifestItem in manifest.Files.Where(x => x.DocumentType == "Conceptual"))
+            foreach (var manifestItem in manifest.Files.Where(x => (x.DocumentType == "Conceptual" && x.SourceRelativePath != "index.md")))
             foreach (var manifestItemOutputFile in manifestItem.OutputFiles)
             {
                 var sourcePath = Path.Combine(manifest.SourceBasePath, manifestItem.SourceRelativePath);
@@ -103,25 +104,25 @@ namespace DocFx.Plugin.LastModified
             articleNode.AppendChild(separatorNode);
             articleNode.AppendChild(paragraphNode);
 
-            if (!string.IsNullOrEmpty(commitHeader))
-            {
+            //if (!string.IsNullOrEmpty(commitHeader))
+            //{
                 // inject collapsible container script
-                InjectCollapseScript(htmlDoc);
+                //InjectCollapseScript(htmlDoc);
 
                 // create collapse container
-                var collapsibleNode = htmlDoc.CreateElement("div");
-                collapsibleNode.SetAttributeValue("class", "collapse-container last-modified");
-                collapsibleNode.SetAttributeValue("id", "accordion");
+                //var collapsibleNode = htmlDoc.CreateElement("div");
+                //collapsibleNode.SetAttributeValue("class", "collapse-container last-modified");
+                //collapsibleNode.SetAttributeValue("id", "accordion");
                 //var reasonHeaderNode = htmlDoc.CreateElement("span");
                 //reasonHeaderNode.InnerHtml = "<span class=\"arrow-r\"></span>Commit Message";
-                var reasonContainerNode = htmlDoc.CreateElement("div");
+                //var reasonContainerNode = htmlDoc.CreateElement("div");
 
                 // inject header
-                var preCodeBlockNode = htmlDoc.CreateElement("pre");
-                var codeBlockNode = htmlDoc.CreateElement("code");
-                codeBlockNode.InnerHtml = commitHeader;
-                preCodeBlockNode.AppendChild(codeBlockNode);
-                reasonContainerNode.AppendChild(preCodeBlockNode);
+                //var preCodeBlockNode = htmlDoc.CreateElement("pre");
+                //var codeBlockNode = htmlDoc.CreateElement("code");
+                //codeBlockNode.InnerHtml = commitHeader;
+                //preCodeBlockNode.AppendChild(codeBlockNode);
+                //reasonContainerNode.AppendChild(preCodeBlockNode);
                 
                 // inject body
                 //preCodeBlockNode = htmlDoc.CreateElement("pre");
@@ -133,9 +134,9 @@ namespace DocFx.Plugin.LastModified
 
                 // inject the entire block
                 //collapsibleNode.AppendChild(reasonHeaderNode);
-                collapsibleNode.AppendChild(reasonContainerNode);
-                articleNode.AppendChild(collapsibleNode);
-            }
+                //collapsibleNode.AppendChild(reasonContainerNode);
+                //articleNode.AppendChild(collapsibleNode);
+            //}
 
             htmlDoc.Save(outputPath);
             _addedFiles++;
